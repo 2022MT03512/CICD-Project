@@ -1,3 +1,3 @@
-# CICD Application
+# BITS CICD Application
 
-This is a small application
+This is a small application to use CICD Porject
