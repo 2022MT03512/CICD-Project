@@ -8,6 +8,12 @@ pipeline {
         PATH = "/opt/apache-maven-3.9.9/bin:$PATH"
     }
     stages {
+        stage("Checkout") {
+            steps {
+                // Checkout the code from your repository
+                checkout scm
+            }
+        }
         stage("build") {
             steps {
                 echo "----------- build started ----------"
@@ -15,14 +21,13 @@ pipeline {
                 echo "----------- build completed ----------"
             }
         }
-        stage("test"){
-            steps{
+        stage("test") {
+            steps {
                 echo "----------- unit test started ----------"
-                sh 'mvn surfire-report:report'
-                echo "----------- unit test completed ----------" 
-             }
-         }
-    
+                sh 'mvn surefire-report:report'
+                echo "----------- unit test completed ----------"
+            }
+        }
         stage('SonarQube analysis') {
             environment {
                 scannerHome = tool 'bits-sonar-scanner'
