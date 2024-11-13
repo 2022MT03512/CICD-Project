@@ -12,6 +12,7 @@
     <properties>
         <java.version>1.8</java.version>
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> <!-- Set encoding to avoid platform-dependent warning -->
     </properties>
 
     <dependencies>
