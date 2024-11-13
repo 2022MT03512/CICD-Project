@@ -46,14 +46,14 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Twitter4J dependency -->
+        <!-- Twitter4J dependency to resolve Trend and TwitterException classes -->
         <dependency>
             <groupId>org.twitter4j</groupId>
             <artifactId>twitter4j-core</artifactId>
             <version>4.0.7</version>
         </dependency>
 
-        <!-- GitHub API for Java dependency -->
+        <!-- GitHub API for Java to resolve GitHubBuilder and GHRepositorySearchBuilder classes -->
         <dependency>
             <groupId>org.kohsuke</groupId>
             <artifactId>github-api</artifactId>
@@ -63,31 +63,24 @@
 
     <build>
         <plugins>
-            <!-- Spring Boot Maven Plugin -->
+            <!-- Spring Boot Maven Plugin for building executable JAR -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.7.5</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
-                    <mainClass>com.example.Application</mainClass> <!-- Replace with your main class -->
+                    <mainClass>com.example.Application</mainClass>
                 </configuration>
             </plugin>
 
-            <!-- Maven Jar Plugin for Main-Class attribute -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>${maven-jar-plugin.version}</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>com.example.Application</mainClass> <!-- Replace with your main class -->
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
-
-            <!-- Maven Surefire Plugin -->
+            <!-- Surefire Plugin for testing -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -97,7 +90,7 @@
                 </configuration>
             </plugin>
 
-            <!-- JaCoCo Maven Plugin for test coverage -->
+            <!-- Jacoco Plugin for code coverage -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
