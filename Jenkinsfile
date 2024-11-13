@@ -4,9 +4,12 @@ pipeline {
             label 'maven'
         }
     }
+    
     environment {
         PATH = "/opt/apache-maven-3.9.9/bin:$PATH"
+        JENKINS_OPTS = "-Dorg.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL=86400"
     }
+
     stages {
         stage("Checkout") {
             steps {
