@@ -1,4 +1,7 @@
 def registry = 'https://bitscicd.jfrog.io/'
+def imageName = 'bitscicd.jfrog.io/bits-cicd-docker-local/example-app'
+def version   = '1.0.0'
+def app       // Declare app variable at a higher scope
 
 pipeline {
     agent {
@@ -68,6 +71,28 @@ pipeline {
                     buildInfo.env.collect()
                     server.publishBuildInfo(buildInfo)
                     echo '<--------------- Jar Publish Ended --------------->'
+                }
+            }
+        }
+
+        stage("Docker Build") {
+            steps {
+                script {
+                    echo '<--------------- Docker Build Started --------------->'
+                    app = docker.build("${imageName}:${version}")
+                    echo '<--------------- Docker Build Ends --------------->'
+                }
+            }
+        }
+
+        stage("Docker Publish") {
+            steps {
+                script {
+                    echo '<--------------- Docker Publish Started --------------->'
+                    docker.withRegistry(registry, 'Jfrog-artifactory-cred') {
+                        app.push()
+                    }
+                    echo '<--------------- Docker Publish Ended --------------->'
                 }
             }
         }
