@@ -1,66 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <!-- Spring Boot Parent -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.5</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <!-- Project Information -->
     <groupId>com.example</groupId>
     <artifactId>cicd-project</artifactId>
     <version>1.0.0</version>
     <name>cicd-project</name>
     <packaging>jar</packaging>
+    <description>Spring Boot Application for CI/CD Project</description>
 
     <properties>
         <java.version>1.8</java.version>
-        <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <!-- Dependencies -->
     <dependencies>
-        <!-- Spring Boot dependencies -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-            <version>2.7.5</version>
-        </dependency>
+        <!-- Spring Boot Starter Web (for REST API) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>2.7.5</version>
         </dependency>
+
+        <!-- Spring Boot Starter Test (for unit testing) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-            <version>2.7.5</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-junit-jupiter</artifactId>
-            <version>5.3.0</version>
-            <scope>test</scope>
         </dependency>
 
-        <!-- Twitter4J dependency -->
+        <!-- GitHub API for Java -->
+        <dependency>
+            <groupId>org.kohsuke</groupId>
+            <artifactId>github-api</artifactId>
+            <version>1.123</version> <!-- Use latest compatible version -->
+        </dependency>
+
+        <!-- Twitter4J for Twitter Integration -->
         <dependency>
             <groupId>org.twitter4j</groupId>
             <artifactId>twitter4j-core</artifactId>
             <version>4.0.7</version>
         </dependency>
 
-        <!-- GitHub API -->
+        <!-- JUnit for unit testing -->
         <dependency>
-            <groupId>org.kohsuke</groupId>
-            <artifactId>github-api</artifactId>
-            <version>1.123</version> <!-- Use the latest compatible version -->
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Mockito for mock testing -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>5.3.0</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
+    <!-- Build Section -->
     <build>
         <plugins>
             <!-- Spring Boot Maven Plugin -->
@@ -69,25 +78,11 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.7.5</version>
                 <configuration>
-                    <mainClass>com.example.Application</mainClass> <!-- Ensure this points to your main class -->
+                    <mainClass>com.example.Application</mainClass> <!-- Ensure this is correct -->
                 </configuration>
             </plugin>
 
-            <!-- Maven Jar Plugin to specify Main-Class if necessary -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.1</version>
-                <configuration>
-                    <archive>
-                        <manifestEntries>
-                            <Main-Class>com.example.Application</Main-Class> <!-- Adjust to your main class -->
-                        </manifestEntries>
-                    </archive>
-                </configuration>
-            </plugin>
-
-            <!-- Other Maven Plugins -->
+            <!-- Maven Surefire Plugin for Unit Tests -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -97,6 +92,7 @@
                 </configuration>
             </plugin>
 
+            <!-- Jacoco Maven Plugin for code coverage -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -119,6 +115,7 @@
         </plugins>
     </build>
 
+    <!-- Distribution Management -->
     <distributionManagement>
         <repository>
             <id>dev</id>
