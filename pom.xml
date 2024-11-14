@@ -9,8 +9,8 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.flamUp</groupId>
-    <artifactId>cicd-project</artifactId>
-    <version>1.0.0</version>
+    <artifactId>spring</artifactId>
+    <version>0.0.2-SNAPSHOT</version>
     <name>spring</name>
     <description>Demo project for Spring Boot</description>
     <properties>
